@@ -6,3 +6,7 @@ Redmine::Plugin.register :dakoku do
   url 'http://example.com/path/to/plugin'
   author_url 'http://example.com/about'
 end
+
+MyController.class_eval do
+  include MyControllerCalendarExtention
+end

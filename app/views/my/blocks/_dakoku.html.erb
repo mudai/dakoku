@@ -1,0 +1,11 @@
+<h3>打刻の記録</h3>
+<p style="float:right;">
+  <%= link_to_previous_month(@year, @month) %> | <%= link_to_next_month(@year, @month) %>
+</p>
+
+<% calendar = Redmine::Helpers::Calendar.new(Date.today, current_language, :month)
+   calendar.events = Issue.visible.find :all,
+                     :conditions => ["#{Issue.table_name}.project_id in (#{@user.projects.collect{|m| m.id}.join(',')}) AND ((start_date>=? and start_date<=?) or (due_date>=? and due_date<=?))", calendar.startdt, calendar.enddt, calendar.startdt, calendar.enddt],
+                     :include => [:project, :tracker, :priority, :assigned_to] unless @user.projects.empty? %>
+
+<%= render :partial => 'common/calendar', :locals => {:calendar => calendar } %>

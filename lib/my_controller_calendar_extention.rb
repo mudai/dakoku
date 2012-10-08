@@ -16,7 +16,7 @@ module MyControllerCalendarExtention
     @year ||= Date.today.year
     @month ||= Date.today.month
 
-    @calendar = Redmine::Helpers::Calendar.new(Date.civil(@year, @month, 1), current_language, :month)
+    @calendar = Dakoku::Helpers::Calendar.new(Date.civil(@year, @month, 1), current_language, :month)
   end
 
 end

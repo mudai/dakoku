@@ -14,7 +14,7 @@
     <%= ("<td class='week-number' title='#{ l(:label_week) }'>#{(day+(11-day.cwday)%7).cweek}</td>".html_safe) if day.cwday == @calendar.first_wday %>
     <td class="<%= day.month==@calendar.month ? 'even' : 'odd' %><%= ' today' if Date.today == day %>">
       <p class="day-num"><%= day.day %></p>
-      <% 'TODO'%>
+      <% 'debugger' %>
     </td>
     <%= '</tr><tr>'.html_safe if day.cwday==@calendar.last_wday and day!=@calendar.enddt %>
     <% day = day + 1

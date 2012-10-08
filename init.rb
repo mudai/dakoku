@@ -7,6 +7,8 @@ Redmine::Plugin.register :dakoku do
   author_url 'http://example.com/about'
 end
 
-MyController.class_eval do
-  include MyControllerCalendarExtention
+
+RedmineApp::Application.config.after_initialize do
+  MyController.send(:include, MyControllerCalendarExtention)
+  User.send(:include, DakokuDatetime::UserExtention)
 end

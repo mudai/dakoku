@@ -14,8 +14,23 @@
     <%= ("<td class='week-number' title='#{ l(:label_week) }'>#{(day+(11-day.cwday)%7).cweek}</td>".html_safe) if day.cwday == @calendar.first_wday %>
     <td class="<%= day.month==@calendar.month ? 'even' : 'odd' %><%= ' today' if Date.today == day %>">
       <p class="day-num"><%= day.day %></p>
-      <%= dakokus.find{|x| x.dakoku_at == day}.inspect %>
-      
+      <% if dakoku = dakokus.find{|x| x.dakoku_at == day} %>
+        <div class="tooltip">
+          <strong>出社</strong>：<%= dakoku.start_at.strftime("%H:%M") %><br />
+          <strong>退社</strong>：<%= dakoku.end_at.strftime("%H:%M") %><br />
+          <strong>コメント</strong>：30文字でtruncate
+          <span class="tip">
+            <strong>出社</strong>：<%= dakoku.start_at.strftime("%H:%M") %><br />
+            <strong>退社</strong>：<%= dakoku.end_at.strftime("%H:%M") %><br />
+            <strong>コメント</strong>：30文字でtruncateしないああああああああああああああああああああああああああああああああああああああああああああああああああああああああ<br />
+            <a href="/issues/329">打刻する</a>
+          </span>
+      </div>
+      <% else %>
+        <strong>未記録</strong><br />
+        <br />
+        <a href="#">打刻する</a>
+      <% end %>
     </td>
     <%= '</tr><tr>'.html_safe if day.cwday==@calendar.last_wday and day!=@calendar.enddt %>
     <% day = day + 1
@@ -23,3 +38,5 @@
   </tr>
 </tbody>
 </table>
+
+

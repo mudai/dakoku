@@ -9,5 +9,7 @@ class CreateDakokuDatetimes < ActiveRecord::Migration
       t.text :comment
       t.timestamps
     end
+
+    add_index :dakoku_datetimes, [:user_id, :dakoku_at], :unique => true
   end
 end

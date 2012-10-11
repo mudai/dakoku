@@ -1,0 +1,13 @@
+
+<h2>打刻編集</h2>
+
+<%= form_for @dakoku, :url => dakoku_path(@dakoku), :method => :put do |f| %>
+  <div class="splitcontentleft">
+    <fieldset class="box tabular">
+      <legend>打刻</legend>
+      <p><label for="start_at">出社</label><%= f.datetime_select :start_at, :default => { :hour => 9, :minute => 00 } %></p>
+      <p><label for="start_at">退社</label><%= f.datetime_select :end_at, :default => { :hour => 21, :minute => 00 } %></p>
+      <p><label for="commet">コメント</label><%= f.text_area :comment, :size => "50x10" %></p>
+    </fieldset>
+    <%= f.submit "編集" %>
+<% end %>

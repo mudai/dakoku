@@ -10,4 +10,8 @@ class DakokuDatetime < ActiveRecord::Base
       end
     end
   end
+
+  def to_param  # overridden
+    dakoku_at
+  end
 end

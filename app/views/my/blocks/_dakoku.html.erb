@@ -18,18 +18,18 @@
         <div class="tooltip">
           <strong>出社</strong>：<%= dakoku.start_at.strftime("%H:%M") %><br />
           <strong>退社</strong>：<%= dakoku.end_at.strftime("%H:%M") %><br />
-          <strong>コメント</strong>：30文字でtruncate
+          <strong>コメント</strong>：<%= truncate(dakoku.comment, :length => 30) %>
           <span class="tip">
             <strong>出社</strong>：<%= dakoku.start_at.strftime("%H:%M") %><br />
             <strong>退社</strong>：<%= dakoku.end_at.strftime("%H:%M") %><br />
-            <strong>コメント</strong>：30文字でtruncateしないああああああああああああああああああああああああああああああああああああああああああああああああああああああああ<br />
-            <a href="/issues/329">打刻する</a>
+            <strong>コメント</strong>：<%= dakoku.comment %><br />
+            <%= link_to "修正", edit_dakoku_path(dakoku) %>
           </span>
       </div>
       <% else %>
         <strong>未記録</strong><br />
         <br />
-        <a href="#">打刻する</a>
+        <%= link_to "打刻", edit_dakoku_path(DakokuDatetime.new(:dakoku_at => day)) %>
       <% end %>
     </td>
     <%= '</tr><tr>'.html_safe if day.cwday==@calendar.last_wday and day!=@calendar.enddt %>

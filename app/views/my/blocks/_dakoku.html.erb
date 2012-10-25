@@ -16,15 +16,27 @@
       <p class="day-num"><%= day.day %></p>
       <% if dakoku = dakokus.find{|x| x.dakoku_at == day} %>
         <div class="tooltip">
-          <strong>出社</strong>：<%= dakoku.start_at.strftime("%H:%M") %><br />
-          <strong>退社</strong>：<%= dakoku.end_at.strftime("%H:%M") %><br />
-          <strong>コメント</strong>：<%= truncate(dakoku.comment, :length => 30) %>
-          <span class="tip">
+          <% if dakoku.holiday? %>
+            <strong>タイプ</strong>：<%= dakoku.status_text %><br />
+            <strong>コメント</strong>：<%= truncate(dakoku.comment, :length => 30) %>
+            <span class="tip">
+              <strong>タイプ</strong>：<%= dakoku.status_text %><br />
+              <strong>コメント</strong>：<%= truncate(dakoku.comment, :length => 30) %>
+              <%= link_to "修正", edit_dakoku_path(dakoku) %>
+            </span>
+          <% else %>
             <strong>出社</strong>：<%= dakoku.start_at.strftime("%H:%M") %><br />
             <strong>退社</strong>：<%= dakoku.end_at.strftime("%H:%M") %><br />
-            <strong>コメント</strong>：<%= dakoku.comment %><br />
-            <%= link_to "修正", edit_dakoku_path(dakoku) %>
-          </span>
+            <strong>タイプ</strong>：<%= dakoku.status_text %><br />
+            <strong>コメント</strong>：<%= truncate(dakoku.comment, :length => 30) %>
+            <span class="tip">
+              <strong>出社</strong>：<%= dakoku.start_at.strftime("%H:%M") %><br />
+              <strong>退社</strong>：<%= dakoku.end_at.strftime("%H:%M") %><br />
+              <strong>タイプ</strong>：<%= dakoku.status_text %><br />
+              <strong>コメント</strong>：<%= dakoku.comment %><br />
+              <%= link_to "修正", edit_dakoku_path(dakoku) %>
+            </span>
+          <% end %>
       </div>
       <% else %>
         <strong>未記録</strong><br />

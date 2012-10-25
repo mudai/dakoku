@@ -7,6 +7,7 @@
       <legend>打刻</legend>
       <p><label for="start_at">出社</label><%= f.datetime_select :start_at, :default => { :hour => 9, :minute => 00 } %></p>
       <p><label for="start_at">退社</label><%= f.datetime_select :end_at, :default => { :hour => 21, :minute => 00 } %></p>
+      <p><label>タイプ</label><%= f.select :status, [["通常出勤", DakokuDatetime::NORMAL_WORK],["休日出勤", DakokuDatetime::HOLIDAY_WORK],["休日", DakokuDatetime::HOLIDAY]] , :html=>{ :selected => DakokuDatetime::NORMAL_WORK } %></p>
       <p><label for="commet">コメント</label><%= f.text_area :comment, :size => "50x10" %></p>
     </fieldset>
     <%= f.submit "編集" %>
